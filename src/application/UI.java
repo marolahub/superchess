@@ -70,7 +70,7 @@ public class UI {
 		if (piece == null) {
 			System.out.print("-" + ANSI_RESET);
 		} else {	
-				System.out.print((piece.getColor()==Color.WHITE?ANSI_WHITE:ANSI_YELLOW) + piece + ANSI_RESET);
+				System.out.print((piece.getColor()==Color.WHITE?ANSI_CYAN:ANSI_YELLOW) + piece + ANSI_RESET);
 		}				
 		System.out.print(" ");	
 	}

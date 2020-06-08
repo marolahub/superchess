@@ -64,6 +64,7 @@ public class Board {
 	}
 	
 	public boolean positionExists(Position position) {
+
 		return positionExists(position.getRow(), position.getColumn());
 	}
 	// aqui há uma peça

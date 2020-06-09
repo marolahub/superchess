@@ -5,40 +5,46 @@
  */
 package application;
 
+import application.chess.ChessException;
 import application.chess.ChessMatch;
 import application.chess.ChessPiece;
 import application.chess.ChessPosition;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Program {
-  //   private Scanner input	= new Scanner(System.in);
+
 		 
 	public static void main(String[] args) {	
 		
+		Scanner input	= new Scanner(System.in);
 		ChessMatch chessMatch = new ChessMatch();
 		
 		while (true) {
 			// UI = using interface
-			UI.printBoard(chessMatch.getPieces());
-			System.out.println("");
-			/*
-			// usuário digita a posição de origem
-			System.out.println("Selecione a peça:");
-			ChessPosition source = UI.readChessPosition(input);
-			System.out.println("");
-		     // usuário digita a posição de destino
-			System.out.println("Em qual posição?");
-			ChessPosition target = UI.readChessPosition(input);
-			*/
-			ChessPosition source = playingChess("Selecione a peça!",  new Scanner(System.in));
-			ChessPosition target = playingChess("Qual a posição?",  new Scanner(System.in));
-			ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+			try {
+
+				UI.clearScreen();
+				UI.printBoard(chessMatch.getPieces());
+				System.out.println();		
+				/*  usuário digita a posição de origem e  usuário digita a posição de destino 	*/
+				ChessPosition source = playingChess(CustomMessages.CHOOSE_PIECE,  input);
+				ChessPosition target = playingChess(CustomMessages.CHOOSE_POSITION,  input);
+				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+			} catch (ChessException e) { 
+				System.out.println(e.getMessage());
+				input.nextLine();				
+			} catch (InputMismatchException e) { 
+				System.out.println(e.getMessage());
+				input.nextLine();				
+			}
+			System.out.println();
 		}
 	}
 	
 	private static ChessPosition playingChess(String msg, Scanner in) {
-			System.out.println("");
-			System.out.println(msg);
+			System.out.print(CustomMessages.SPACE);
+			System.out.print(msg);
 			return UI.readChessPosition(in);
 	}
 	

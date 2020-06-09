@@ -5,6 +5,7 @@
  */
 package application.chess;
 
+import application.CustomMessages;
 import application.board.Position;
 /**
  *
@@ -17,7 +18,7 @@ public class ChessPosition {
 	public ChessPosition(char column, int row) {
 		
 		if ((column < 'a' || column > 'h') && (row < 1 && row > 8)) {
-			throw new ChessException("Esta posição não é válida. Selecione entre a1 e h8.");
+			throw new ChessException(CustomMessages.INVALID_POSITION);
 		}
 		
 		this.column = column;

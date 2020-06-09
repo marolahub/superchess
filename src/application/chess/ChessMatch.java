@@ -5,6 +5,7 @@
  */
 package application.chess;
 
+import application.CustomMessages;
 import application.board.Board;
 import application.board.Piece;
 import application.board.Position;
@@ -48,7 +49,7 @@ public class ChessMatch {
 	
 	private void validateSourcePosition(Position position) {
 		if (!board.thereIsAPiece(position)) {
-				throw new ChessException("Não existe peça esta posição de origem!");
+				throw new ChessException(CustomMessages.THERES_NO_PIECE_POSITION);
 		}
 	}
 	

@@ -5,6 +5,8 @@
  */
 package application.board;
 
+import application.CustomMessages;
+
 /**
  *
  * @author maroli.junior
@@ -16,9 +18,7 @@ public class Board {
 	private Piece[][] pieces;
 	
 	public Board(int rows, int columns) {
-		if (rows < 1 || columns < 1) {
-			throw new BoardException("Não é possível criar tabuleiro sem posições!");
-		}
+		if (rows < 1 || columns < 1) { 	throw new BoardException(CustomMessages.BOARD_WITHOUT_POSITIONS);  }
 		
 		this.rows = rows;
 		this.columns = columns;
@@ -36,21 +36,21 @@ public class Board {
 	public Piece piece(int row, int column) {
 		// caso a posição passada não exista
 		if(!positionExists(row, column)) {
-			throw new BoardException("Esta posição não existe");
+			throw new BoardException(CustomMessages.NON_EXISTENT_POSITIONS);
 		}
 		return pieces[row][column];
 	}
 	
 	public Piece piece(Position position) {
 		if(!positionExists(position.getRow(), position.getColumn())) {
-			throw new BoardException("Esta posição não existe");
+			throw new BoardException(CustomMessages.NON_EXISTENT_POSITIONS);
 		}
 		return pieces[position.getRow()][position.getColumn()];
 	}
 	
 	public void placePiece(Piece piece, Position position) {
 		if (thereIsAPiece(position)) {
-			throw new BoardException("Já existe uma peça nesta posição" + position);
+			throw new BoardException(CustomMessages.OCCUPIED_POSITION + position);
 		}
 		
 		pieces[position.getRow()][position.getColumn()] = piece;
@@ -64,21 +64,20 @@ public class Board {
 	}
 	
 	public boolean positionExists(Position position) {
-
 		return positionExists(position.getRow(), position.getColumn());
 	}
 	// aqui há uma peça
 	public boolean thereIsAPiece(Position position) {
 		// verifica se existe ou não algo nesta posição
 		if (!positionExists(position)) {
-			throw new BoardException("Esta posição não existe");
+			throw new BoardException(CustomMessages.NON_EXISTENT_POSITIONS);
 		}
 		return (piece(position) != null);
 	}
 	
 	public Piece removePiece(Position position) {
 			if(!positionExists(position)) {
-					throw new BoardException("Posição inexistente!");
+					throw new BoardException(CustomMessages.NON_EXISTENT_POSITIONS);
 			}
 			if(piece(position) == null) {
 					return null;

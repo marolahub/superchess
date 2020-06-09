@@ -18,6 +18,7 @@ public class CustomMessages {
 		public static final String OCCUPIED_POSITION = "Já existe uma peça nesta posição!";
 		public static final String CHOOSE_PIECE = "Escolha uma peça: ";
 		public static final String CHOOSE_POSITION = "Escolha a posição: ";
+		public static final String WITHOUT_MOVE = "Não há movimentos possíveis para esta peça!";
 		 
 		 // formatações
 		public static final String SPACE = "";

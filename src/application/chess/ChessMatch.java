@@ -34,8 +34,7 @@ public class ChessMatch {
 				// faz-se um downcast
 				match[i][j] = (ChessPiece) board.piece(i, j);
 			}
-		}
-		
+		}		
 		return match;
 	}	
 	// recebe como parâmetros a posição de origem e a posição de destino
@@ -50,6 +49,9 @@ public class ChessMatch {
 	private void validateSourcePosition(Position position) {
 		if (!board.thereIsAPiece(position)) {
 				throw new ChessException(CustomMessages.THERES_NO_PIECE_POSITION);
+		}
+		if (!board.piece(position).isThereAnyPossibleMove()) {
+				throw new ChessException(CustomMessages.WITHOUT_MOVE);
 		}
 	}
 	

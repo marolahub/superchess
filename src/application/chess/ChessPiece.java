@@ -12,7 +12,7 @@ import application.board.Piece;
  *
  * @author maroli.junior
  */
-public class ChessPiece extends Piece {
+public abstract class ChessPiece extends Piece {
 		
 	private Color color;
 	

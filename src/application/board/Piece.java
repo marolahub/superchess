@@ -5,7 +5,7 @@
  */
 package application.board;
 
-public class Piece {
+public abstract class Piece {
 	
 	protected Position position;
 	private Board board;
@@ -17,5 +17,24 @@ public class Piece {
 	
 	protected Board getBoard() {
 		return board;
+	}
+	
+	public abstract boolean[][] possibleMoves();
+	
+	public boolean possibleMovie(Position position) {
+			return possibleMoves()[position.getRow()][position.getColumn()];
+	}
+	
+	public boolean isThereAnyPossibleMove() {
+			boolean[][] possibleMove = possibleMoves();
+			
+			for (int row = 0; row < possibleMove.length; row++) {
+					for (int column = 0; column < possibleMove.length; column++) {
+							if (possibleMove[row][column]) {
+									return true;
+							}
+					}
+			}
+			return false;
 	}
 }

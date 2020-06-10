@@ -19,6 +19,7 @@ public class CustomMessages {
 		public static final String CHOOSE_PIECE = "Escolha uma peça: ";
 		public static final String CHOOSE_POSITION = "Escolha a posição: ";
 		public static final String WITHOUT_MOVE = "Não há movimentos possíveis para esta peça!";
+		public static final String CANNOT_MOVE_TARGET_POSITION = "Esta peça não pode mover-se à posição de destino!";
 		 
 		 // formatações
 		public static final String SPACE = "";

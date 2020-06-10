@@ -7,6 +7,7 @@ package application.chess;
 
 import application.board.Board;
 import application.board.Piece;
+import application.board.Position;
 
 /**
  *
@@ -23,5 +24,12 @@ public abstract class ChessPiece extends Piece {
 
 	public Color getColor() {
 		return color;
-	}		
+	}	
+
+	protected boolean isThereOpponentPiece(Position position) {
+			ChessPiece chessPiece = (ChessPiece)getBoard().piece(position);
+			// testa se a cor da peça é diferente da cor da peça que está na posição
+			return (chessPiece != null) && (chessPiece.getColor() != color);
+	}
+	
 }

@@ -41,6 +41,18 @@ public class UI {
 		}
 		System.out.println(CustomMessages.BOARD_BASE);
 	}
+
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		for (int lines = 0; lines < pieces.length; lines++) {
+			System.out.print((8 - lines) + CustomMessages.BLANK_SPACE);
+			for (int column = 0; column < pieces.length; column++) {
+				printPiece(pieces[lines][column], possibleMoves[lines][column]);
+			}
+			// quebra de linha
+			System.out.println();
+		}
+		System.out.println(CustomMessages.BOARD_BASE);
+	}
 	// método para limpar a tela
 	public static void clearScreen() {
 			//  \033[H\033[2J
@@ -52,9 +64,11 @@ public class UI {
 	// impressão de uma única peça
 	private static void printPiece(ChessPiece piece, boolean background) {
 					
-		if (background) { System.out.print(ConsoleColors.BLACK_BACKGROUND); 	}
-		
-		if (piece == null) { System.out.print("-" + ConsoleColors.RESET); 
+		if (background) {
+			System.out.print(ConsoleColors.BLUE_BACKGROUND);
+		}
+		if (piece == null) {
+			System.out.print("-" + ConsoleColors.RESET);
 		} else {	
 			System.out.print((piece.getColor()==Color.WHITE?ConsoleColors.RED:ConsoleColors.YELLOW) + piece + ConsoleColors.RESET);
 		}		

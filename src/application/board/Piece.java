@@ -26,15 +26,15 @@ public abstract class Piece {
 	}
 	
 	public boolean isThereAnyPossibleMove() {
-			boolean[][] possibleMove = possibleMoves();
+		boolean[][] possibleMove = possibleMoves();
 			
-			for (int row = 0; row < possibleMove.length; row++) {
-					for (int column = 0; column < possibleMove.length; column++) {
-							if (possibleMove[row][column]) {
-									return true;
-							}
-					}
+		for (int row = 0; row < possibleMove.length; row++) {
+			for (int column = 0; column < possibleMove.length; column++) {
+				if (possibleMove[row][column]) {
+					return true;
+				}
 			}
-			return false;
+		}
+		return false;
 	}
 }

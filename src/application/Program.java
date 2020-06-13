@@ -29,6 +29,11 @@ public class Program {
 				System.out.println();		
 				/*  usuário digita a posição de origem e  usuário digita a posição de destino 	*/
 				ChessPosition source = playingChess(CustomMessages.CHOOSE_PIECE,  input);
+
+				boolean [][] possibleMoves = chessMatch.possibleMoves(source);
+				UI.clearScreen();
+				UI.printBoard(chessMatch.getPieces(), possibleMoves);
+
 				ChessPosition target = playingChess(CustomMessages.CHOOSE_POSITION,  input);
 				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 			} catch (ChessException e) { 

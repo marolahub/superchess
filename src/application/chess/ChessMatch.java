@@ -36,7 +36,16 @@ public class ChessMatch {
 			}
 		}		
 		return match;
-	}	
+	}
+
+	public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+		Position position = sourcePosition.toPosition();
+		// valida as posições da peça no local de origem
+		validateSourcePosition(position);
+		return board.piece(position).possibleMoves();
+	}
+
+
 	// recebe como parâmetros a posição de origem e a posição de destino
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
 			Position source = sourcePosition.toPosition();

@@ -25,7 +25,7 @@ public class Program {
 			try {
 
 				UI.clearScreen();
-				UI.printBoard(chessMatch.getPieces());
+				UI.printMatch(chessMatch);
 				System.out.println();		
 				/*  usuário digita a posição de origem e  usuário digita a posição de destino 	*/
 				ChessPosition source = playingChess(CustomMessages.CHOOSE_PIECE,  input);

@@ -18,14 +18,26 @@ import application.chess.pieces.Rook;
 
 public class ChessMatch {
 
+	private int turn;
+	private Color currentPlayerColor;
 	private Board board;
 	
 	public ChessMatch() {
 		// nesta classe - principal - defini-se tamanho do tabuleiro
 		board = new Board(8, 8);
+		turn = 1;
+		currentPlayerColor = Color.WHITE;
 		initialSetup();
 	}
-	
+
+	public int getTurn() {
+		return this.turn;
+	}
+
+	public Color getCurrentPlayerColor() {
+		return this.currentPlayerColor;
+	}
+
 	public ChessPiece[][] getPieces() {
 		ChessPiece[][] match = new ChessPiece[board.getRows()][board.getColumns()];
 		
@@ -55,6 +67,7 @@ public class ChessMatch {
 			// valida a posição de destino
 			validateTargetPosition(source, target);
 			Piece capturePiece = makeMove(source, target);
+			nextTurn();
 			return (ChessPiece) capturePiece;		
 	}
 	
@@ -62,6 +75,11 @@ public class ChessMatch {
 		if (!board.thereIsAPiece(position)) {
 				throw new ChessException(CustomMessages.THERES_NO_PIECE_POSITION);
 		}
+		// feito downcast de Piece para ChessPiece para ter acesso ao método getColor
+		if (currentPlayerColor != ((ChessPiece)board.piece(position)).getColor()) {
+				throw new ChessException(CustomMessages.PEACE_NOT_BELONG);
+		}
+
 		if (!board.piece(position).isThereAnyPossibleMove()) {
 				throw new ChessException(CustomMessages.WITHOUT_MOVE);
 		}
@@ -86,6 +104,11 @@ public class ChessMatch {
 	
 	private void placeNewPiece(char column, int row, ChessPiece chessPiece) {
 		this.board.placePiece(chessPiece, new ChessPosition(column, row).toPosition());
+	}
+
+	private void nextTurn() {
+		turn++;
+		currentPlayerColor = (currentPlayerColor == Color.WHITE? Color.BLACK: Color.WHITE);
 	}
 	
 	// método setup inicial da partida (repõe as peças sobre o tabuleiro colocando cada uma no seu local inicial)

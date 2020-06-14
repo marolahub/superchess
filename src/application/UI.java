@@ -5,12 +5,10 @@
  */
 package application;
 
-import application.chess.ChessPiece;
-import application.chess.ChessPosition;
-import application.chess.Color;
+import application.chess.*;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import application.chess.ConsoleColors;
 
 // UI = using interface
 public class UI {
@@ -28,6 +26,13 @@ public class UI {
 			} catch (RuntimeException error) {
 					throw new InputMismatchException(CustomMessages.INVALID_POSITION);
 			}
+	}
+
+	public static void printMatch(ChessMatch chessMatch) {
+		printBoard(chessMatch.getPieces());
+		System.out.println();
+		System.out.println("Turn: " + chessMatch.getTurn());
+		System.out.println(CustomMessages.WAITING_PLAYER + chessMatch.getCurrentPlayerColor());
 	}
 
 	public static void printBoard(ChessPiece[][] pieces) {

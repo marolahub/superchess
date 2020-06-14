@@ -9,7 +9,10 @@ import application.chess.ChessException;
 import application.chess.ChessMatch;
 import application.chess.ChessPiece;
 import application.chess.ChessPosition;
+
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Program {
@@ -19,13 +22,14 @@ public class Program {
 		
 		Scanner input	= new Scanner(System.in);
 		ChessMatch chessMatch = new ChessMatch();
+		List<ChessPiece> capturedChessPiece = new ArrayList<>();
 		
 		while (true) {
 			// UI = using interface
 			try {
 
 				UI.clearScreen();
-				UI.printMatch(chessMatch);
+				UI.printMatch(chessMatch, capturedChessPiece);
 				System.out.println();		
 				/*  usuário digita a posição de origem e  usuário digita a posição de destino 	*/
 				ChessPosition source = playingChess(CustomMessages.CHOOSE_PIECE,  input);
@@ -36,6 +40,11 @@ public class Program {
 
 				ChessPosition target = playingChess(CustomMessages.CHOOSE_POSITION,  input);
 				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+
+				if (capturedPiece != null) {
+					capturedChessPiece.add(capturedPiece);
+				}
+
 			} catch (ChessException e) { 
 				System.out.println(e.getMessage());
 				input.nextLine();				

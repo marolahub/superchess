@@ -10,6 +10,5 @@ package application.chess;
  * @author maroli.junior
  */
 public enum Color {
-		BLACK, WHITE;
-		
+    YELLOW, RED;
 }

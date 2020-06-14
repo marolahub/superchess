@@ -7,8 +7,11 @@ package application;
 
 import application.chess.*;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 // UI = using interface
 public class UI {
@@ -28,8 +31,10 @@ public class UI {
 			}
 	}
 
-	public static void printMatch(ChessMatch chessMatch) {
+	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> capturedChessPiece) {
 		printBoard(chessMatch.getPieces());
+		System.out.println();
+		printCapturedPieces(capturedChessPiece);
 		System.out.println();
 		System.out.println("Turn: " + chessMatch.getTurn());
 		System.out.println(CustomMessages.WAITING_PLAYER + chessMatch.getCurrentPlayerColor());
@@ -75,9 +80,27 @@ public class UI {
 		if (piece == null) {
 			System.out.print("-" + ConsoleColors.RESET);
 		} else {	
-			System.out.print((piece.getColor()==Color.WHITE?ConsoleColors.RED:ConsoleColors.YELLOW) + piece + ConsoleColors.RESET);
+			System.out.print((piece.getColor()==Color.YELLOW ?ConsoleColors.RED:ConsoleColors.YELLOW) + piece + ConsoleColors.RESET);
 		}		
 		// não alterar para não estragar a estrutura de alinhamento do tabuleiro
 		System.out.print(" ");	
+	}
+
+	private static void printCapturedPieces(List<ChessPiece> capChessPieces) {
+		                                                       // método lâmbda: filtra da lista dos que tem cor vermelha
+		List<ChessPiece> red = capChessPieces.stream().filter(predicated -> predicated.getColor() == Color.YELLOW).collect(Collectors.toList());
+															   // método lambda: fitra da lista dos que tem cor amarela
+		List<ChessPiece> yellow = capChessPieces.stream().filter(predicated -> predicated.getColor() == Color.RED).collect(Collectors.toList());
+
+		System.out.println(CustomMessages.CAPTURE_PIECES);
+
+		System.out.print("Vermelhas: ");
+		System.out.println(Arrays.toString(red.toArray()));
+		System.out.println(ConsoleColors.RESET);
+
+		System.out.print("Amarelas: ");
+		System.out.println(Arrays.toString(yellow.toArray()));
+		System.out.println(ConsoleColors.RESET);
+
 	}
 }

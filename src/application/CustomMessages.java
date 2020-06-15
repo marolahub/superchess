@@ -26,6 +26,8 @@ public class CustomMessages {
 		public static final String WAITING_PLAYER = "Aguardando o jogador: ";
 		public static final String CAPTURE_PIECES = "Peças capturadas: ";
 
+		public static final String CHECK = "Check!";
+		public static final String YOURSELF_CHECK = "Você colocou-se em CHECK! Movimento não possível";
 		public static final String THERE_IS_NO_KING(Color kingColor) {
 			return "Não existe rei " + kingColor + " no tabuleiro";
 		}

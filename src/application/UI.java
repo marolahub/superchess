@@ -38,6 +38,9 @@ public class UI {
 		System.out.println();
 		System.out.println("Turn: " + chessMatch.getTurn());
 		System.out.println(CustomMessages.WAITING_PLAYER + chessMatch.getCurrentPlayerColor());
+		if (chessMatch.getCheck()) {
+			System.out.println(CustomMessages.CHECK);
+		}
 	}
 
 	public static void printBoard(ChessPiece[][] pieces) {

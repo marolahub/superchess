@@ -22,6 +22,11 @@ public abstract class ChessPiece extends Piece {
 		this.color = color;
 	}
 
+	public ChessPosition getChessPosition() {
+		// este método converte a posição de matriz (x,y) em posição do tabuleiro (0,a)
+		return ChessPosition.fromPosition(position);
+	}
+
 	public Color getColor() {
 		return color;
 	}	

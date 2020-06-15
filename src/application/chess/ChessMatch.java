@@ -18,12 +18,15 @@ import application.chess.pieces.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChessMatch {
 
 	private int turn;
 	private Color currentPlayerColor;
 	private Board board;
+
+	private Boolean check;
 
 	private List<Piece> piecesOnTheBoard;
 	private List<Piece> capturedPieces = new ArrayList<>();
@@ -34,6 +37,7 @@ public class ChessMatch {
 		turn = 1;
 		piecesOnTheBoard = new ArrayList<>();
 		currentPlayerColor = Color.YELLOW;
+		check = false;
 		initialSetup();
 	}
 
@@ -115,6 +119,23 @@ public class ChessMatch {
 
 			return capturedPiece;			
 	}
+
+	private void undoMove(Position source, Position target, Piece capturedPiece) {
+		// a peça que chegou na posição de destino é removida do Board
+		Piece piece = board.removePiece(target);
+		// devolve a peça à sua posição de origem
+		board.placePiece(piece, source);
+
+		// se esta peça havia sido capturada, devolve a peça ao tabuleiro removendo da lista de peças capturadas
+		if (capturedPieces != null) {
+			// estorna a pela capturada à posição de destino, isto é, onde a peça estava anteriormente
+			board.placePiece(capturedPiece, target);
+			// remove a peça da lista de peças capturadas
+			capturedPieces.remove(capturedPiece);
+			// adiciona novamente no tabuleiro
+			piecesOnTheBoard.add(capturedPiece);
+		}
+	}
 	
 	private void placeNewPiece(char column, int row, ChessPiece chessPiece) {
 		this.board.placePiece(chessPiece, new ChessPosition(column, row).toPosition());
@@ -126,7 +147,22 @@ public class ChessMatch {
 		turn++;
 		currentPlayerColor = (currentPlayerColor == Color.YELLOW ? Color.RED : Color.YELLOW);
 	}
-	
+
+	private Color opponent(Color oponentColor) {
+		return (oponentColor == Color.RED)? Color.YELLOW: Color.RED;
+	}
+
+	private ChessPiece kingPiece(Color color) {
+		// faz uma busca (filter) dentro da lista que está no tabuleiro, Lambda: x recebe a cor que está no método caso seja igual a cor do argumento
+		List<Piece> listPiece = piecesOnTheBoard.stream().filter(xPiece -> ((ChessPiece)xPiece).getColor() == color).collect(Collectors.toList());
+		for (Piece piece: listPiece) {
+			// instanceof é um método que verifica se a classe instanciada é igual a comparativa
+			if (piece instanceof King) {
+				return ((ChessPiece) piece);
+			}
+		}
+		throw new IllegalStateException(CustomMessages.THERE_IS_NO_KING(color));
+	}
 	// método setup inicial da partida (repõe as peças sobre o tabuleiro colocando cada uma no seu local inicial)
 	private void initialSetup() {
 		

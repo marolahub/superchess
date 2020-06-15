@@ -5,6 +5,8 @@
  */
 package application;
 
+import application.chess.Color;
+
 /**
  *
  * @author maroli.junior
@@ -22,8 +24,11 @@ public class CustomMessages {
 		public static final String CANNOT_MOVE_TARGET_POSITION = "Esta peça não pode mover-se à posição de destino!";
 		public static final String PEACE_NOT_BELONG = "A peça escolhida não é sua!";
 		public static final String WAITING_PLAYER = "Aguardando o jogador: ";
-
 		public static final String CAPTURE_PIECES = "Peças capturadas: ";
+
+		public static final String THERE_IS_NO_KING(Color kingColor) {
+			return "Não existe rei " + kingColor + " no tabuleiro";
+		}
 		 // formatações
 		public static final String SPACE = "";
 		public static final String BLANK_SPACE = " ";

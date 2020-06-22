@@ -32,9 +32,9 @@ public abstract class ChessPiece extends Piece {
 	}	
 
 	protected boolean isThereOpponentPiece(Position position) {
-			ChessPiece chessPiece = (ChessPiece)getBoard().piece(position);
-			// testa se a cor da peça é diferente da cor da peça que está na posição
-			return (chessPiece != null) && (chessPiece.getColor() != color);
+		ChessPiece chessPiece = (ChessPiece)getBoard().piece(position);
+		// testa se a cor da peça é diferente da cor da peça que está na posição
+		return (chessPiece != null) && (chessPiece.getColor() != color);
 	}
 
 	public boolean canMove(Position position) {

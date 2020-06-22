@@ -17,20 +17,19 @@ import java.util.stream.Collectors;
 public class UI {
 	
 	public static ChessPosition readChessPosition(Scanner scanner) {
-			// trata de uma possível exceção de entrada de dados
-			try {
-				String input = scanner.nextLine();
-				// obtém do input a coluna (índice zero)
-				char column = input.charAt(0);
-				// obtém do input a linha (índice um)
-				int row = Integer.parseInt(input.substring(1));
-				// define uma posição com os dados inputados
-				return new ChessPosition(column, row);
+		// trata de uma possível exceção de entrada de dados
+		try {
+			String input = scanner.nextLine();
+			// obtém do input a coluna (índice zero)
+			char column = input.charAt(0);
+			// obtém do input a linha (índice um)
+			int row = Integer.parseInt(input.substring(1));
+			// define uma posição com os dados inputados
+			return new ChessPosition(column, row);
 			} catch (RuntimeException error) {
-					throw new InputMismatchException(CustomMessages.INVALID_POSITION);
+				throw new InputMismatchException(CustomMessages.INVALID_POSITION);
 			}
 	}
-
 	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> capturedChessPiece) {
 		printBoard(chessMatch.getPieces());
 		System.out.println();
@@ -68,10 +67,9 @@ public class UI {
 	}
 	// método para limpar a tela
 	public static void clearScreen() {
-			//  \033[H\033[2J
-			System.out.print(CustomMessages.CLEAR);
-			// 
-			System.out.flush();
+		//  \033[H\033[2J
+		System.out.print(CustomMessages.CLEAR);
+		System.out.flush();
 	}
 	
 	// impressão de uma única peça
@@ -83,7 +81,14 @@ public class UI {
 		if (piece == null) {
 			System.out.print("-" + ConsoleColors.RESET);
 		} else {	
-			System.out.print((piece.getColor()==Color.YELLOW ?ConsoleColors.RED:ConsoleColors.YELLOW) + piece + ConsoleColors.RESET);
+			System.out.print((piece.getColor()==Color.YELLOW ?ConsoleColors.YELLOW:ConsoleColors.RED) + piece + ConsoleColors.RESET);
+			/*
+			if (piece.getColor() == Color.WHITE) {
+				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
+			}
+			else {
+				System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
+			}*/
 		}		
 		// não alterar para não estragar a estrutura de alinhamento do tabuleiro
 		System.out.print(" ");	
@@ -92,8 +97,8 @@ public class UI {
 	private static void printCapturedPieces(List<ChessPiece> capChessPieces) {
 		                                                       // método lâmbda: filtra da lista dos que tem cor vermelha
 		List<ChessPiece> red = capChessPieces.stream().filter(predicated -> predicated.getColor() == Color.YELLOW).collect(Collectors.toList());
-															   // método lambda: fitra da lista dos que tem cor amarela
-		List<ChessPiece> yellow = capChessPieces.stream().filter(predicated -> predicated.getColor() == Color.RED).collect(Collectors.toList());
+															   // método lambda: filtra da lista dos que tem cor amarela
+		List<ChessPiece> yellow = capChessPieces.stream().filter(predicated -> predicated.getColor() == Color.YELLOW).collect(Collectors.toList());
 
 		System.out.println(CustomMessages.CAPTURE_PIECES);
 

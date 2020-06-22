@@ -18,7 +18,9 @@ public class Board {
 	private Piece[][] pieces;
 	
 	public Board(int rows, int columns) {
-		if (rows < 1 || columns < 1) { 	throw new BoardException(CustomMessages.BOARD_WITHOUT_POSITIONS);  }
+		if (rows < 1 || columns < 1) {
+			throw new BoardException(CustomMessages.BOARD_WITHOUT_POSITIONS);
+		}
 		
 		this.rows = rows;
 		this.columns = columns;
@@ -35,9 +37,7 @@ public class Board {
 	
 	public Piece piece(int row, int column) {
 		// caso a posição passada não exista
-		if(!positionExists(row, column)) {
-			throw new BoardException(CustomMessages.NON_EXISTENT_POSITIONS);
-		}
+		if(!positionExists(row, column)) { throw new BoardException(CustomMessages.NON_EXISTENT_POSITIONS); }
 		return pieces[row][column];
 	}
 	
@@ -52,7 +52,6 @@ public class Board {
 		if (thereIsAPiece(position)) {
 			throw new BoardException(CustomMessages.OCCUPIED_POSITION + position);
 		}
-		
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
 	}
@@ -76,17 +75,17 @@ public class Board {
 	}
 	
 	public Piece removePiece(Position position) {
-			if(!positionExists(position)) {
-					throw new BoardException(CustomMessages.NON_EXISTENT_POSITIONS);
-			}
-			if(piece(position) == null) {
-					return null;
-			}
-			Piece pieceAux  = piece(position);
-			pieceAux.position = null;
-			// atribui nulo à matriz de peças, isto é, o tabuleiro
-			pieces[position.getRow()][position.getColumn()] = null;
-			return pieceAux;					
+		if(!positionExists(position)) {
+			throw new BoardException(CustomMessages.NON_EXISTENT_POSITIONS);
+		}
+		if(piece(position) == null) {
+			return null;
+		}
+		Piece pieceAux  = piece(position);
+		pieceAux.position = null;
+		// atribui nulo à matriz de peças, isto é, o tabuleiro
+		pieces[position.getRow()][position.getColumn()] = null;
+		return pieceAux;
 	}
 		
 }

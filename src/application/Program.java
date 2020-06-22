@@ -57,9 +57,9 @@ public class Program {
 	}
 	
 	private static ChessPosition playingChess(String msg, Scanner in) {
-			System.out.print(CustomMessages.SPACE);
-			System.out.print(msg);
-			return UI.readChessPosition(in);
+		System.out.print(CustomMessages.BLANK);
+		System.out.print(msg);
+		return UI.readChessPosition(in);
 	}
 	
 }
